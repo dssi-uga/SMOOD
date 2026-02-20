@@ -15,7 +15,7 @@ All paths are **relative** and no machine-specific absolute paths are exposed.
 
 ## Repository layout (relevant files)
 
-- `SMOOD_GitHub/`
+- `Root/`
   - `core/`
     - `gym_env.py` &mdash; PyBullet UR5e environment (`ur5GymEnv`).
     - `ppo.py` &mdash; PPO implementation and `ActorCritic` network (also exposes `get_latent` for OOD).
@@ -86,14 +86,14 @@ If you only want to run **simulation and PPO training**, you do **not** need the
 
 ## 2. Installation
 
-From the project root (the directory that contains `SMOOD_GitHub/`), create a virtual environment and install dependencies:
+From the project root, create a virtual environment and install dependencies:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate    # Windows PowerShell: .venv\Scripts\Activate.ps1
 
 pip install --upgrade pip
-pip install -r SMOOD_GitHub/requirements.txt
+pip install -r requirements.txt
 ```
 
 > Note: `pyrealsense2` and `ur-rtde` may require platform-specific wheels; if `pip` fails, follow Intel RealSense and UR RTDE official installation instructions and re‑run the command without those packages in `requirements.txt`.
@@ -124,7 +124,7 @@ If your URDFs live in a different folder, either:
 You can smoke‑test the environment (without training) by importing and stepping it manually, e.g. from a Python shell:
 
 ```python
-from SMOOD_GitHub.core.gym_env import ur5GymEnv
+from core.gym_env import ur5GymEnv
 
 env = ur5GymEnv(renders=True, maxSteps=100, actionRepeat=2, randObjPos=False)
 obs, info = env.reset()
@@ -141,7 +141,7 @@ env.close()
 To train a PPO agent in the PyBullet environment:
 
 ```bash
-python SMOOD_GitHub/training/train_rl.py --render --randObjPos
+python training/train_rl.py --render --randObjPos
 ```
 
 Important command‑line arguments:
@@ -175,7 +175,7 @@ This script supports:
 - A **static image path** (`--image_path`), or
 - **Live RealSense RGB stream** (`--live_cam`).
 
-Key configuration inside `SMOOD_GitHub/CV/inference_OBD.py`:
+Key configuration inside `CV/inference_OBD.py`:
 
 - `DEFAULT_IMAGE_PATH = "Florence2/test_images/overlap_NIST.jpg"`
 - `DEFAULT_MODEL_PATH = "Florence2/Saved_Models/epoch_12"`
@@ -189,7 +189,7 @@ These are relative placeholders; you should:
 **Example: static image mode**
 
 ```bash
-python SMOOD_GitHub/CV/inference_OBD.py \
+python CV/inference_OBD.py \
   --image_path Florence2/test_images/overlap_NIST.jpg \
   --target_object "calibration cube" \
   --model_path Florence2/Saved_Models/epoch_12
@@ -198,7 +198,7 @@ python SMOOD_GitHub/CV/inference_OBD.py \
 **Example: RealSense live mode (for first 10 frames)**
 
 ```bash
-python SMOOD_GitHub/CV/inference_OBD.py \
+python CV/inference_OBD.py \
   --live_cam \
   --target_object "calibration cube" \
   --model_path Florence2/Saved_Models/epoch_12
@@ -230,7 +230,7 @@ The script uses **relative paths**:
 Run:
 
 ```bash
-python SMOOD_GitHub/CV/2d_to_3d.py
+python CV/2d_to_3d.py
 ```
 
 It will:
@@ -266,13 +266,13 @@ This assumes you can run the real‑robot controller safely under nominal condit
 **Record visual latents only:**
 
 ```bash
-python SMOOD_GitHub/sim2real.py --record_normal_visual_latents
+python sim2real.py --record_normal_visual_latents
 ```
 
 **Record PPO latents only:**
 
 ```bash
-python SMOOD_GitHub/sim2real.py --record_normal_ppo_latents
+python sim2real.py --record_normal_ppo_latents
 ```
 
 Each mode will append to:
@@ -287,7 +287,7 @@ Each mode will append to:
 Once you have a sufficient number of normal visual latents:
 
 ```bash
-python SMOOD_GitHub/ood/fit_vision_ood.py
+python ood/fit_vision_ood.py
 ```
 
 This script:
@@ -304,7 +304,7 @@ This script:
 Similarly, for the PPO latent space:
 
 ```bash
-python SMOOD_GitHub/ood/fit_ppo_swd_ood.py
+python ood/fit_ppo_swd_ood.py
 ```
 
 This script:
@@ -331,7 +331,7 @@ You can run:
 python SMOOD_GitHub/sim2real_runner/sim2real.py
 ```
 
-Key configuration at the top of `SMOOD_GitHub/sim2real_runner/sim2real.py`:
+Key configuration at the top of `sim2real_runner/sim2real.py`:
 
 - `ROBOT_IP` &mdash; IP/hostname of your UR controller (default `"192.168.1.5"`).  
   **Edit this to match your setup.**
@@ -365,7 +365,7 @@ On exit, `sim2real.py`:
 
 ## 7. Reproducibility and tips
 
-- Always run commands from the **project root**, not from inside `SMOOD_GitHub/`, so that all relative paths resolve correctly.
+- Always run commands from the **project root**, so that all relative paths resolve correctly.
 - For simulation‑only experiments:
   - You can ignore `sim2real.py`, `2d_to_3d.py`, and the RealSense/UR dependencies.
   - Focus on `gym_env.py`, `ppo.py`, and `train_rl.py`.
@@ -376,7 +376,7 @@ On exit, `sim2real.py`:
 
 If you keep this folder intact and follow the steps above, another user should be able to:
 
-1. Install dependencies from `SMOOD_GitHub/requirements.txt`.
+1. Install dependencies from `requirements.txt`.
 2. Train PPO in PyBullet.
 3. Run Florence‑based detection and 2D→3D localization.
 4. Fit OOD models from recorded latents.
