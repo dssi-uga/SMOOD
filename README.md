@@ -15,7 +15,7 @@ All paths are **relative** and no machine-specific absolute paths are exposed.
 
 ## Repository layout (relevant files)
 
-- `Root/`
+- `SMOOD/`
   - `core/`
     - `gym_env.py` &mdash; PyBullet UR5e environment (`ur5GymEnv`).
     - `ppo.py` &mdash; PPO implementation and `ActorCritic` network (also exposes `get_latent` for OOD).
@@ -50,10 +50,10 @@ Additionally, at the **project root** (one level above `SMOOD_GitHub/`) you must
   - `OOD/ProprioOOD/ppo_latents_L2_normal.npy`
   - `OOD/ProprioOOD/ppo_swd_ood_model.npz`
 
-All scripts in `SMOOD_GitHub/` assume they are run with the **project root** as the current working directory, for example:
+All scripts in `SMOOD/` assume they are run with the **project root** as the current working directory, for example:
 
 ```bash
-python SMOOD_GitHub/training/train_rl.py
+python training/train_rl.py
 ```
 
 ---
