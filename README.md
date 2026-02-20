@@ -37,7 +37,7 @@ All paths are **relative** and no machine-specific absolute paths are exposed.
     - `positions_3d.json` &mdash; Example output of `2d_to_3d.py` (goal and obstacle positions).
   - `requirements.txt` &mdash; Python dependencies for this subset.
 
-Additionally, at the **project root** (one level above `SMOOD_GitHub/`) you must have:
+Additionally, at the **project root** (one level above `SMOOD/`) you must have:
 
 - `ur_e_description/` &mdash; URDF + meshes for UR5e and the table:
   - `ur_e_description/urdf/ur5e.urdf`
