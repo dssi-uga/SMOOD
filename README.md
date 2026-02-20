@@ -16,16 +16,21 @@ All paths are **relative** and no machine-specific absolute paths are exposed.
 ## Repository layout (relevant files)
 
 - `SMOOD_GitHub/`
-  - `gym_env.py` &mdash; PyBullet UR5e environment (`ur5GymEnv`).
-  - `train_rl.py` &mdash; PPO training loop for the simulation environment.
-  - `ppo.py` &mdash; PPO implementation and `ActorCritic` network (also exposes `get_latent` for OOD).
-  - `sim2real.py` &mdash; Real-robot execution + online OOD monitoring and safety.
-  - `plot_trajectory.py` &mdash; Logging and plotting utilities for sim-to-real trajectories.
-  - `florence_vision.py` &mdash; Florence-2 model + vision encoder wrapper (with optional LoRA adapter).
-  - `vision_ood_detector.py` &mdash; Visual OOD detector (sliced Wasserstein distance with uncertainty).
-  - `ppo_ood_detector.py` &mdash; Proprioceptive OOD detector for PPO latents.
-  - `fit_vision_ood.py` &mdash; Fits OOD model for the vision latent space from recorded latents.
-  - `fit_ppo_swd_ood.py` &mdash; Fits OOD model for the PPO latent space from recorded latents.
+  - `core/`
+    - `gym_env.py` &mdash; PyBullet UR5e environment (`ur5GymEnv`).
+    - `ppo.py` &mdash; PPO implementation and `ActorCritic` network (also exposes `get_latent` for OOD).
+  - `training/`
+    - `train_rl.py` &mdash; PPO training loop for the simulation environment.
+  - `vision/`
+    - `florence_vision.py` &mdash; Florence-2 model + vision encoder wrapper (with optional LoRA adapter).
+    - `vision_ood_detector.py` &mdash; Visual OOD detector (sliced Wasserstein distance with uncertainty).
+  - `ood/`
+    - `ppo_ood_detector.py` &mdash; Proprioceptive OOD detector for PPO latents.
+    - `fit_vision_ood.py` &mdash; Fits OOD model for the vision latent space from recorded latents.
+    - `fit_ppo_swd_ood.py` &mdash; Fits OOD model for the PPO latent space from recorded latents.
+  - `sim2real_runner/`
+    - `sim2real.py` &mdash; Real-robot execution + online OOD monitoring and safety.
+    - `plot_trajectory.py` &mdash; Logging and plotting utilities for sim-to-real trajectories.
   - `CV/`
     - `inference_OBD.py` &mdash; Florence-2 based object detection (image or live RealSense).
     - `2d_to_3d.py` &mdash; Converts 2D detections + depth to 3D positions in the robot base frame.
@@ -48,7 +53,7 @@ Additionally, at the **project root** (one level above `SMOOD_GitHub/`) you must
 All scripts in `SMOOD_GitHub/` assume they are run with the **project root** as the current working directory, for example:
 
 ```bash
-python SMOOD_GitHub/train_rl.py
+python SMOOD_GitHub/training/train_rl.py
 ```
 
 ---
@@ -119,7 +124,7 @@ If your URDFs live in a different folder, either:
 You can smoke‑test the environment (without training) by importing and stepping it manually, e.g. from a Python shell:
 
 ```python
-from SMOOD_GitHub.gym_env import ur5GymEnv
+from SMOOD_GitHub.core.gym_env import ur5GymEnv
 
 env = ur5GymEnv(renders=True, maxSteps=100, actionRepeat=2, randObjPos=False)
 obs, info = env.reset()
@@ -136,7 +141,7 @@ env.close()
 To train a PPO agent in the PyBullet environment:
 
 ```bash
-python SMOOD_GitHub/train_rl.py --render --randObjPos
+python SMOOD_GitHub/training/train_rl.py --render --randObjPos
 ```
 
 Important command‑line arguments:
@@ -282,7 +287,7 @@ Each mode will append to:
 Once you have a sufficient number of normal visual latents:
 
 ```bash
-python SMOOD_GitHub/fit_vision_ood.py
+python SMOOD_GitHub/ood/fit_vision_ood.py
 ```
 
 This script:
@@ -299,7 +304,7 @@ This script:
 Similarly, for the PPO latent space:
 
 ```bash
-python SMOOD_GitHub/fit_ppo_swd_ood.py
+python SMOOD_GitHub/ood/fit_ppo_swd_ood.py
 ```
 
 This script:
@@ -312,7 +317,7 @@ This script:
 
 ---
 
-## 6. Sim‑to‑real execution with OOD safety (`sim2real.py`)
+## 6. Sim‑to‑real execution with OOD safety (`sim2real_runner/sim2real.py`)
 
 Once you have:
 
@@ -323,10 +328,10 @@ Once you have:
 You can run:
 
 ```bash
-python SMOOD_GitHub/sim2real.py
+python SMOOD_GitHub/sim2real_runner/sim2real.py
 ```
 
-Key configuration at the top of `SMOOD_GitHub/sim2real.py`:
+Key configuration at the top of `SMOOD_GitHub/sim2real_runner/sim2real.py`:
 
 - `ROBOT_IP` &mdash; IP/hostname of your UR controller (default `"192.168.1.5"`).  
   **Edit this to match your setup.**

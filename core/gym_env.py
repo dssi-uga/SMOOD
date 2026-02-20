@@ -150,7 +150,6 @@ class ur5GymEnv(gym.Env):
     def check_collisions(self):
         return len(pybullet.getContactPoints()) > 0
 
-
     # ========== Core Env ==========
 
     def reset(self, seed=None, options=None):
@@ -233,7 +232,6 @@ class ur5GymEnv(gym.Env):
         self._draw_tcp_axes()
 
         return self.observation, {}
-
 
     def step(self, action):
         action = np.clip(np.array(action), -1, 1)

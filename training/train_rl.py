@@ -1,6 +1,9 @@
-# Copy of training script with relative imports for GitHub
-
 import os
+import sys
+
+# Allow imports from SMOOD_GitHub/* when running this script directly
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import argparse
 from datetime import datetime
 import numpy as np
@@ -8,8 +11,8 @@ import torch
 import gymnasium
 import random
 from torch.utils.tensorboard import SummaryWriter
-from ppo import PPO, Memory, ActorCritic
-from gym_env import ur5GymEnv
+from core.ppo import PPO, Memory, ActorCritic
+from core.gym_env import ur5GymEnv
 
 title = 'PyBullet UR5 robot'
 

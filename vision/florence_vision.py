@@ -42,7 +42,6 @@ class VisionEncoder(nn.Module):
         if pixel_values.ndim != 4:
             raise ValueError(f"Expected (B, C, H, W), got {pixel_values.shape}")
 
-        device = pixel_values.device
         B, C, H, W = pixel_values.shape
         T = 1  # single frame
 
