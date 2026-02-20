@@ -328,7 +328,7 @@ Once you have:
 You can run:
 
 ```bash
-python SMOOD_GitHub/sim2real_runner/sim2real.py
+python sim2real_runner/sim2real.py
 ```
 
 Key configuration at the top of `sim2real_runner/sim2real.py`:
