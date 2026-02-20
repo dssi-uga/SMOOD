@@ -1,0 +1,17 @@
+numpy
+torch
+transformers
+peft
+Pillow
+opencv-python
+pyrealsense2
+ur-rtde
+gymnasium
+pybullet
+matplotlib
+pandas
+scikit-learn
+joblib
+tensorboard
+openpyxl
+
