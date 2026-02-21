@@ -14,8 +14,6 @@ This repository provides a **minimal, reproducible subset** of the full
 research system, including simulation, training, perception, and
 optional sim-to-real execution.
 
-------------------------------------------------------------------------
-
 ## Overview
 
 SMOOD integrates three main components:
@@ -27,7 +25,6 @@ SMOOD integrates three main components:
 The framework pauses robot motion when abnormal conditions are detected
 and resumes execution once normal operation is restored.
 
-------------------------------------------------------------------------
 ## Repository Structure
 
     SMOOD/
@@ -67,8 +64,6 @@ Project root should also contain:
 
 All paths are relative for portability and reproducibility.
 
-------------------------------------------------------------------------
-
 ## Installation
 
 ``` bash
@@ -77,8 +72,6 @@ source .venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-
-------------------------------------------------------------------------
 
 ## Running the Simulation
 
@@ -104,8 +97,6 @@ env.close()
 python training/train_rl.py --render
 ```
 
-------------------------------------------------------------------------
-
 ## Vision Pipeline
 
 ### Object Detection
@@ -128,8 +119,6 @@ Output:
 
     CV/positions_3d.json
 
-------------------------------------------------------------------------
-
 ## Training OOD Models (Optional)
 
 Record normal latents:
@@ -146,8 +135,6 @@ python ood/fit_vision_ood.py
 python ood/fit_ppo_swd_ood.py
 ```
 
-------------------------------------------------------------------------
-
 ## Sim-to-Real Execution (Optional)
 
 ``` bash
@@ -157,32 +144,18 @@ python sim2real_runner/sim2real.py
 The robot pauses automatically when OOD conditions are detected and
 resumes once behavior returns to normal.
 
-------------------------------------------------------------------------
-
 ## Typical Workflow
 
-1.  Install dependencies\
-2.  Run simulation test\
-3.  Train PPO policy\
-4.  Test vision detection\
-5.  Fit OOD models (optional)\
+1.  Install dependencies
+2.  Run simulation test
+3.  Train PPO policy
+4.  Test vision detection
+5.  Fit OOD models (optional)
 6.  Run sim-to-real execution (optional)
-
-------------------------------------------------------------------------
-
-## Research Context
-
-This repository contains a reproducible subset of a larger robotic
-inspection framework focused on safe reinforcement learning and
-distribution-shift awareness in manufacturing environments.
-
-------------------------------------------------------------------------
 
 ## License
 
 This project is released under the Apache License 2.0. See the LICENSE file for details.
-
-------------------------------------------------------------------------
 
 ## Citation
 
