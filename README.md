@@ -28,19 +28,6 @@ The framework pauses robot motion when abnormal conditions are detected
 and resumes execution once normal operation is restored.
 
 ------------------------------------------------------------------------
-
-## What This Repository Supports
-
-  Mode              Description                          Hardware Needed
-  ----------------- ------------------------------------ -----------------
-  Simulation        Train and test PPO in PyBullet       x
-  Vision Pipeline   Object detection + 3D localization   RGB-D camera
-  Full Pipeline     OOD-aware real robot execution       UR5e + camera
-
-Most users should begin with **simulation only**.
-
-------------------------------------------------------------------------
-
 ## Repository Structure
 
     SMOOD/
