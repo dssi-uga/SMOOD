@@ -1,4 +1,4 @@
-## SMOOD: Safe Model-Based Out-of-Distribution Detection for UR5e Scanning
+## SMOOD: Safety-Aware Multi-Modal Out-of-Distribution Detection for Reinforcement Learning-Based Robotic Inspection
 
 This folder contains a self-contained subset of the full project that you can publish and run from GitHub.  
 It covers:
