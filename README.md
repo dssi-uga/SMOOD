@@ -20,11 +20,9 @@ optional sim-to-real execution.
 
 SMOOD integrates three main components:
 
--   **Control** --- PPO policy controlling a UR5e end-effector\
--   **Perception** --- Florence-2 vision encoder for object
-    understanding\
--   **Safety** --- multi-modal OOD detection using latent
-    representations
+-   **Control** - PPO policy controlling a UR5e end-effector
+-   **Perception** - Florence-2 vision encoder for object understanding
+-   **Safety** - multi-modal OOD detection using latent representations
 
 The framework pauses robot motion when abnormal conditions are detected
 and resumes execution once normal operation is restored.
