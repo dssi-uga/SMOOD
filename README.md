@@ -67,7 +67,7 @@ To run the **full sim-to-real pipeline** (not just simulation), you need:
 - A **UR5e** (or compatible UR robot) reachable via Ethernet.
 - A **RealSense RGB‑D camera** (e.g. D435/D455), mounted and calibrated relative to the UR5e TCP.
 - Hand–eye calibration matrix `T_tcp_cam.npy` in `CV/`:
-  - This is a \(4 \times 4\) homogeneous transform from the robot TCP frame to the camera frame.
+  - This is a 4 x 4 homogeneous transform from the robot TCP frame to the camera frame.
 - A machine that can:
   - Reach the UR robot IP (e.g. `192.168.1.5`).
   - Connect to the RealSense camera.
